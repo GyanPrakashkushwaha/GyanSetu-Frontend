@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import 'katex/dist/katex.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base resets ─── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  @apply bg-navy-950 text-slate-100 font-sans antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124, 58, 237, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { @apply bg-navy-900; }
+::-webkit-scrollbar-thumb { @apply bg-navy-600 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-violet-600; }
+
+/* ─── Glass card mixin ─── */
+@layer components {
+  .glass-card {
+    @apply relative rounded-2xl border border-white/5 backdrop-blur-sm;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/10;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  .section-title {
+    @apply text-xl font-bold text-slate-100 flex items-center gap-3;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide;
+  }
+
+  /* Shimmer skeleton */
+  .skeleton {
+    @apply rounded-lg bg-navy-800;
+    background: linear-gradient(90deg, #0f172a 25%, #1e293b 50%, #0f172a 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Glow ring on active stages */
+  .stage-active {
+    @apply ring-2 ring-violet-500 ring-offset-2 ring-offset-navy-900;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
+  }
+
+  /* Timeline line */
+  .timeline-line {
+    @apply absolute top-5 left-0 right-0 h-0.5;
+    background: linear-gradient(90deg, transparent, rgba(124,58,237,0.6), rgba(6,182,212,0.6), transparent);
+  }
+
+  /* Neon border */
+  .neon-border {
+    border: 1px solid transparent;
+    background: linear-gradient(#0a0f1e, #0a0f1e) padding-box,
+                linear-gradient(135deg, rgba(124,58,237,0.6), rgba(6,182,212,0.6)) border-box;
+  }
+
+  /* Drag-over highlight */
+  .drag-active {
+    @apply border-violet-500 bg-violet-500/10;
+    box-shadow: 0 0 40px rgba(124,58,237,0.3), inset 0 0 40px rgba(124,58,237,0.05);
+  }
+}
+
+/* ─── KaTeX overrides ─── */
+.katex { @apply text-cyan-300 font-mono text-sm; }
+
+/* ─── Accordion animation ─── */
+.accordion-content {
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+/* ─── Timeline scroll ─── */
+.timeline-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(124,58,237,0.5) transparent;
+}
