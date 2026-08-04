@@ -16,14 +16,17 @@ export default function UploadZone({ onJobStarted }) {
     if (!f) return;
     if (f.type !== 'application/pdf') {
       setUploadError('Only PDF files are supported.');
+      console.log('Only PDF files are supported.');
       return;
     }
     if (f.size > 50 * 1024 * 1024) {
       setUploadError('File size must be under 50 MB.');
+      console.log('File size must be under 50 MB.');
       return;
     }
     setUploadError(null);
     setFile(f);
+    console.log("set file")
   }, []);
 
   const onDrop = useCallback((e) => {
